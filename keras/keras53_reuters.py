@@ -34,8 +34,8 @@ print("뉴스기사의 평균길이 : ", sum(map(len, x_train)) / len(x_train)) 
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.utils import to_categorical
 
-x_train = pad_sequences(x_train, maxlen=100, padding='pre') # (8982, 100) #maxlen은 임의로 정해준다.
-x_test = pad_sequences(x_test, maxlen=100, padding='pre') # (8982, 100) 
+x_train = pad_sequences(x_train, maxlen=500, padding='pre') # (8982, 100) #maxlen은 임의로 정해준다.
+x_test = pad_sequences(x_test, maxlen=500, padding='pre') # (8982, 100) 
 print(x_train.shape, x_test.shape) 
 print(type(x_train), type(x_train[0]))
 print(x_train[1])
@@ -55,7 +55,7 @@ print(y_train.shape, y_test.shape) # (8982, 46) (2246, 46)
 
 #2. 모델구성
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, LSTM, Embedding
+from tensorflow.keras.layers import Dense, LSTM, Embedding, GRU
 
 # 실습, 완성해보세요
 # 임베딩으로 시작, 파라미터 2~3개 사용
@@ -64,13 +64,13 @@ from tensorflow.keras.layers import Dense, LSTM, Embedding
 # softmax, categorical ent, 
 
 model = Sequential()
-model.add(Embedding(10000, 64))
-model.add(LSTM(32, activation='relu'))
-model.add(Dense(46, activation='softmax'))
+model.add(Embedding(10000, 100))
+model.add(GRU(128))
+model.add(Dense(2, activation='sigmoid'))
 
 model.summary()
 #3. compile, fit
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['acc'])
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['acc'])
 model.fit(x_train, y_train, epochs=10, batch_size=512, validation_split=0.2, verbose=1)
     
 #4. 평가, 예측
@@ -78,4 +78,7 @@ loss = model.evaluate(x_test, y_test)
 print("loss : ", loss[0])
 print("acc : ", loss[1])
 
-
+'''
+loss :  0.5763950347900391
+acc :  0.6892399787902832
+'''

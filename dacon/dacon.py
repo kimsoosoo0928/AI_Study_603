@@ -108,3 +108,19 @@ index = index.reshape(9131,)
 file = np.column_stack([index, prediction])
 file = pd.DataFrame(file)
 file.to_csv('D:\study_603\dacon\_data/new.csv,', header=['index', 'topic_idx'], index=False)
+
+'''
+loss: 0.0070 - acc: 0.9980 - val_loss: 1.1705 - val_acc: 0.7155
+'''
+
+'''
+Errors may have originated from an input operation.
+Input Source operations connected to node model/embedding/embedding_lookup:
+ model/embedding/embedding_lookup/2746 (defined at C:\ProgramData\Anaconda3\lib\contextlib.py:113)
+
+Input Source operations connected to node model/embedding/embedding_lookup:
+ model/embedding/embedding_lookup/2746 (defined at C:\ProgramData\Anaconda3\lib\contextlib.py:113)
+
+Function call stack:
+test_function -> test_function
+'''
