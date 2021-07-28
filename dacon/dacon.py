@@ -51,12 +51,19 @@ print(np.unique(y)) # [0 1 2 3 4 5 6]
 y = to_categorical(y)
 print(np.unique(y)) # [0. 1.]
 
+# npy save
+np.save('D:\study_603\_save\_npy/ntg_x.npy', arr=x)
+np.save('./_save/_npy/NTG_y.npy', arr=y)
+np.save('./_save/_npy/NTG_x_pred.npy', arr=x_pred)
+
+
 # train_test_split
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y,
         train_size=0.8, test_size=0.2, random_state=66)
 
 print(x_train.shape)
+
 
 #2. model
 from tensorflow.keras import models, Model
